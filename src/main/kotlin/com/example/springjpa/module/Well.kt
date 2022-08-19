@@ -3,6 +3,7 @@ package com.example.springjpa.module
 import org.hibernate.annotations.Type
 import org.hibernate.annotations.TypeDef
 import org.hibernate.engine.spi.SharedSessionContractImplementor
+import org.hibernate.id.ResultSetIdentifierConsumer
 import org.hibernate.usertype.EnhancedUserType
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Component
@@ -11,11 +12,7 @@ import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLType
 import java.sql.Types
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.ManyToOne
-import javax.persistence.OneToMany
-import javax.persistence.Table
+import javax.persistence.*
 
 interface WellRepo : CrudRepository<Well, ComplexId>
 interface ScenarioRepo: CrudRepository<Scenario, ComplexId>
@@ -23,12 +20,13 @@ interface ScenarioRepo: CrudRepository<Scenario, ComplexId>
 @Entity
 class Well(
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Type(type = "com.example.springjpa.module.ComplexIdUserType")
-    var id: ComplexId,
+    var id: ComplexId?,
 
     var name: String,
 
-    @OneToMany(mappedBy = "well")
+    @OneToMany(mappedBy = "well", fetch = FetchType.LAZY)
     var scenarios: Collection<Scenario> = emptyList()
 )
 
@@ -41,7 +39,7 @@ class Scenario(
     var name: String,
 
     @ManyToOne
-    var well: Well
+    var well: Well?
 )
 
 class ComplexId(val clientUid: String, val id: Int) : Serializable
@@ -49,7 +47,11 @@ class ComplexId(val clientUid: String, val id: Int) : Serializable
 
 
 @Component
-class ComplexIdUserType : EnhancedUserType {
+class ComplexIdUserType : EnhancedUserType, ResultSetIdentifierConsumer {
+    override fun consumeIdentifier(resultSet: ResultSet): Serializable {
+        return ComplexId("generated", resultSet.getInt(1))
+    }
+
     override fun equals(x: Any?, y: Any?): Boolean {
         return when {
             x === null && y !== null -> false
