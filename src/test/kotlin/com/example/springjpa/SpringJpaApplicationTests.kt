@@ -6,8 +6,9 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.data.repository.findByIdOrNull
-import org.springframework.transaction.annotation.Transactional
+import org.springframework.orm.jpa.JpaTransactionManager
+import org.springframework.test.context.jdbc.Sql
+import org.springframework.transaction.TransactionManager
 
 @SpringBootTest
 class SpringJpaApplicationTests {
@@ -26,16 +27,16 @@ class SpringJpaApplicationTests {
     private lateinit var scenarioRepo: ScenarioRepo
 
     @Test
-    @Transactional
+    @Sql("/test.sql")
     fun contextLoads() {
-        val well = Well(null, "marko")
-        wellRepo.save(well)
-        val scenarioId = ComplexId("adfasdf", 22)
-        scenarioRepo.save(Scenario(scenarioId, "new-scenario", well))
+        val wellFromDb = wellRepo.findAll()
+        val well1 = Well("without-scenario")
+        val well2 = Well("with-scenario")
+        wellRepo.saveAll(listOf(well1, well2))
+        scenarioRepo.save(Scenario("new-scenario").apply { well = well2 })
 
-        assert(scenarioRepo.findByIdOrNull(scenarioId)!!.well?.id?.id == 1)
-        val wellFromRepo = wellRepo.findByIdOrNull(ComplexId("", 1))!!
-        wellFromRepo.scenarios.size == 1
+        val r1 = wellRepo.funnyGetById(WellId("", 1))
+        val r2 = wellRepo.funnyGetById(WellId("", 2))
     }
 
 }
