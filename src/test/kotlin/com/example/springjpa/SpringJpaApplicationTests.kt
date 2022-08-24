@@ -3,6 +3,7 @@ package com.example.springjpa
 import com.example.springjpa.module.*
 import com.example.springjpa.module.repositories.ScenarioRepo
 import com.example.springjpa.module.repositories.WellRepo
+import com.example.springjpa.module.repositories.WellRepo2
 import org.h2.tools.Server
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -24,6 +25,9 @@ class SpringJpaApplicationTests {
     private lateinit var wellRepo: WellRepo
 
     @Autowired
+    private lateinit var wellRepo2: WellRepo2
+
+    @Autowired
     private lateinit var scenarioRepo: ScenarioRepo
 
     @Test
@@ -37,6 +41,11 @@ class SpringJpaApplicationTests {
 
         val r1 = wellRepo.funnyGetById(WellId("", 1))
         val r2 = wellRepo.funnyGetById(WellId("", 2))
+        val r21 = wellRepo2.funnyGetById(WellId("", 1))
+        val r22 = wellRepo2.funnyGetById(WellId("", 2))
+
+        val scenarios = scenarioRepo.findAll()
+
     }
 
 }
