@@ -1,14 +1,14 @@
 package com.example.springjpa
 
 import com.example.springjpa.module.*
+import com.example.springjpa.module.repositories.ScenarioRepo
+import com.example.springjpa.module.repositories.WellRepo
 import org.h2.tools.Server
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.orm.jpa.JpaTransactionManager
 import org.springframework.test.context.jdbc.Sql
-import org.springframework.transaction.TransactionManager
 
 @SpringBootTest
 class SpringJpaApplicationTests {
