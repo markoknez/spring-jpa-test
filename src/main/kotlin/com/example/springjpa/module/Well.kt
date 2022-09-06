@@ -11,5 +11,3 @@ class Well(var name: String) {
     @Type(type = "com.example.springjpa.module.customtypes.ComplexIdSingleColumnType")
     var id: WellId? = null
 }
-
-
