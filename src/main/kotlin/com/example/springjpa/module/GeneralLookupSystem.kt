@@ -37,9 +37,16 @@ class GeneralLookupLanguage(var name: String, var cultureCode: String, var isDef
 //Q: This should be given into the constructor, or enough later?
 //Q: Since this dont have Id what should we do?
 @Entity
-//@IdClass(GeneralLookupValueId::class)
-class GeneralLookupValue(
-    @Id var lookupId: GeneralLookupItemId, @Id var langId: GeneralLookupLanguageId, var name: String
-)
+@IdClass(GeneralLookupValueId::class)
+class GeneralLookupValue(@Id @Type(type = "com.example.springjpa.module.customtypes.ComplexIdSingleColumnType") var lookupId: GeneralLookupItemId, @Id @Type(type = "com.example.springjpa.module.customtypes.ComplexIdSingleColumnType") var langId: GeneralLookupLanguageId, var name: String)
 
-//data class GeneralLookupValueId(var lookupId: GeneralLookupItem, var langId: GeneralLookupLanguageId) : Serializable
+
+class GeneralLookupValueId() : Serializable {
+    @Id
+    @Type(type = "com.example.springjpa.module.customtypes.ComplexIdSingleColumnType")
+    var lookupId: GeneralLookupItemId? = null
+
+    @Id
+    @Type(type = "com.example.springjpa.module.customtypes.ComplexIdSingleColumnType")
+    var langId: GeneralLookupLanguageId? = null
+}

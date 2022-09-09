@@ -8,26 +8,19 @@ import org.springframework.stereotype.Repository
 
 
 @Repository
-public class GeneralLookupSystem {
+public class GeneralLookupSystem() {
     interface GeneralLookupTypeRepo : CrudRepository<GeneralLookupType, GeneralLookupTypeId>
     interface GeneralLookupItemRepo : CrudRepository<GeneralLookupItem, GeneralLookupItemId>
     interface GeneralLookupLanguageRepo : CrudRepository<GeneralLookupLanguage, GeneralLookupLanguageId>
 
     //Q what should be the id here?
-    interface GeneralLookupValueRepo : CrudRepository<GeneralLookupValue, Int>
+    interface GeneralLookupValueRepo : CrudRepository<GeneralLookupValue, GeneralLookupValueId>
 
     @Component
-    class Container {
-        @Autowired
-        lateinit var type:GeneralLookupTypeRepo
-
-        @Autowired
-        lateinit var item:GeneralLookupItemRepo
-
-        @Autowired
-        lateinit var language:GeneralLookupLanguageRepo
-
-        @Autowired
-        lateinit var values:GeneralLookupValueRepo
-    }
+    class Container(
+        val type: GeneralLookupTypeRepo,
+        val item: GeneralLookupItemRepo,
+        val language: GeneralLookupLanguageRepo,
+        val values: GeneralLookupValueRepo
+    )
 }
