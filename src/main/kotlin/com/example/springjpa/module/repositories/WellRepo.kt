@@ -38,17 +38,17 @@ class JdbcTemplateTest(
     private val dataSource: DataSource,
 //    private val jdbcTemplate: JdbcTemplate
 ) {
-    fun getWell(wellId: WellId): Well? {
-        return dataSource.connection.use {
-            it.prepareStatement("select id, name from well where id = 1").use { preparedStatement ->
-                preparedStatement.executeQuery().use { resultSet ->
-                    if(!resultSet.next()) return null
-                    return Well(resultSet.getString(2)).apply {
-                        id = WellId("cid", resultSet.getInt(1))
-                    }
-                }
-            }
-        }
+//    fun getWell(wellId: WellId): Well? {
+//        return dataSource.connection.use {
+//            it.prepareStatement("select id, name from well where id = 1").use { preparedStatement ->
+//                preparedStatement.executeQuery().use { resultSet ->
+//                    if(!resultSet.next()) return null
+//                    return Well(resultSet.getString(2)).apply {
+//                        id = WellId("cid", resultSet.getInt(1))
+//                    }
+//                }
+//            }
+//        }
 //        return jdbcTemplate.query("select id, name from well where id = 1", ResultSetExtractor { rs ->
 //            if(!rs.next()) null
 //            else {
@@ -57,5 +57,6 @@ class JdbcTemplateTest(
 //                }
 //            }
 //        })
+//}
     }
-}
+

@@ -6,8 +6,8 @@ class ScenarioId(override val clientUid: String, override val id: Int) : Complex
 class WellId(override val clientUid: String, override val id: Int) : ComplexId
 class RigId(override val clientUid: String, override val id: Int) : ComplexId
 class GeneralLookupTypeId(override val clientUid: String, override val id: Int) : ComplexId
-class GeneralLookupItemId(override val clientUid: String, override val id: Int) : ComplexId{
-}
+class GeneralLookupItemId(override val clientUid: String, override val id: Int) : ComplexId
+class CommentId(override val clientUid: String, override val id: Int) : ComplexId
 class GeneralLookupLanguageId(override val clientUid: String, override val id: Int) : ComplexId
 class ScenarioAttributeValueId(override val clientUid: String, override val id: Int) : ComplexId
 

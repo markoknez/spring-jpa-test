@@ -8,6 +8,10 @@ plugins {
     kotlin("plugin.jpa") version "1.6.21"
 }
 
+allOpen {
+    annotation("javax.persistence.Entity")
+}
+
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
@@ -38,5 +42,6 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.withType<Test> {
+    executable = File("C:/jdks/jdk-17.0.4.1", "bin/java").toString()
     useJUnitPlatform()
 }

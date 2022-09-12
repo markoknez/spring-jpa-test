@@ -1,5 +1,3 @@
---insert into well (name) values ('marko')
---insert into test (alsoName) values ('with-scenario')
 insert into rig(name, description) VALUES ('rig1', 'desc1')
 insert into rig(name, description) VALUES ('rig2', 'desc2')
 insert into rig(name, description) VALUES ('rig3', 'desc3')
@@ -14,3 +12,5 @@ insert into general_lookup_type(name) Values('scentype')
 insert into general_lookup_item(typeId, shortname) Values(1, 'item1')
 
 insert into scenario_attribute(scenarioId, lookupId) VALUES(1, 1)
+insert into comments(comment, scenarioId) Values('comment', 1)
+

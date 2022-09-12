@@ -16,8 +16,8 @@ create table if not exists scenario
 (
     id int primary key auto_increment,
     name varchar(255) not null,
-    wellid int not null,
-    rigid int not null,
+    wellId int not null,
+    rigId int not null,
     foreign key (wellId) references well(id),
     foreign key (rigId) references Rig(id)
 );
@@ -59,4 +59,12 @@ create table if not exists scenario_attribute
     lookupId int not null,
     foreign key (lookupId) references general_lookup_item(id),
     foreign key (scenarioId) references scenario(id)
+);
+
+create table if not exists comments
+(
+    id int primary key auto_increment,
+    comment varchar(255) not null,
+    scenarioId int not null,
+    foreign key (scenarioid) references scenario(id)
 );

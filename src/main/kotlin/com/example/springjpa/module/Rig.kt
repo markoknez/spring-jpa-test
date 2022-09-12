@@ -7,12 +7,16 @@ import java.util.Date
 import javax.persistence.*
 
 @Entity
-class Rig(var name: String, var description:String, buildDate:Date?) {
+@Table(name = "rig")
+class Rig(
+    var name: String,
+    var description: String,
+    var buildDate: Date?
+) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Type(type = "com.example.springjpa.module.customtypes.ComplexIdSingleColumnType")
     var id: RigId? = null
-
 }
 
 
