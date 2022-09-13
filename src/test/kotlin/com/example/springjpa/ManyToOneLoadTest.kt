@@ -29,11 +29,25 @@ class ManyToOneLoadTest {
     @Test
     @Transactional
     fun testForLazyLoading(){
-        //getting a scenario
+        // when
         val scenario = scenarioRepo.findAll().firstOrNull()
-        //this will not trigger a load
+        // this will not trigger a load
         println(scenario?.rig?.id)
-        //this will trigger a load
+        // this will trigger a load
         println(scenario?.rig)
+        //next line is a minefield
+        scenario?.rig!!.name = "abc"
+        //scenarioRepo.save(scenario)
+    }
+
+    @Test
+    @Transactional
+    fun testForLazyLoadingWithAttributes(){
+        // getting a scenario
+        val scenario = scenarioRepo.findAll().firstOrNull()
+        // this is working
+        println(scenarioRepo.findAttributesForScenario(scenario!!.id!!.id))
+        // this is not, and according to
+        println("attributes:${scenario.attributes}")
     }
 }

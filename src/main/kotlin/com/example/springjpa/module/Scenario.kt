@@ -1,8 +1,6 @@
 package com.example.springjpa.module
 
 
-import org.hibernate.annotations.LazyToOne
-import org.hibernate.annotations.LazyToOneOption
 import org.hibernate.annotations.Type
 import javax.persistence.*
 
@@ -10,6 +8,10 @@ import javax.persistence.*
 @Table(name = "scenario")
 class Scenario(
     var name: String,
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    var rig: Rig? = null,
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    var well: Well? = null
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,12 +25,11 @@ class Scenario(
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="wellId")
     var well: Well? = null
 
     @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "scenario_attribute", joinColumns = [JoinColumn(name = "scenarioId")])
-    @Column(name = "lookupId")
+    @CollectionTable(name = "scenario_attribute", joinColumns = [JoinColumn(name = "scenario_Id")])
+    @Column(name = "lookup_Id")
     @Type(type = "com.example.springjpa.module.customtypes.ComplexIdSingleColumnType")
     var attributes: MutableSet<ScenarioAttributeValueId> = mutableSetOf()
 }

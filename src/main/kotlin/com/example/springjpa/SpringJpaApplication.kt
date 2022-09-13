@@ -28,12 +28,12 @@ class Runner(
     private val wellRepo: WellRepo,
     private val rigRepo: RigRepo,
     private val scenarioRepo: ScenarioRepo,
-    private val generalSystemRepos:GeneralLookupSystem.Container,
+    private val generalSystemRepos: GeneralLookupSystem.Container,
 ) : ApplicationRunner {
 
     override fun run(args: ApplicationArguments?) {
         //clientsSeparatedByTransaction()
-        doingStuffsWithRigAndScenario()
+//        doingStuffsWithRigAndScenario()
 //        testingWithPrefilledData()
     }
 
@@ -52,16 +52,16 @@ class Runner(
 //        }
 //    }
 
-    fun doingStuffsWithRigAndScenario() {
-        val well1 = wellRepo.save(Well("well1"))
-        val scenario1 = scenarioRepo.save(Scenario("scenario1"))
-        scenario1.rig= Rig("rig1", "desc1", null)
-        scenario1.well = well1
-        scenarioRepo.save(scenario1)
-        println(scenario1.rig?.id)
-        val desc1 = scenario1.rig?.description
-        println(desc1)
-    }
+//    fun doingStuffsWithRigAndScenario() {
+//        val well1 = wellRepo.save(Well("well1"))
+//        val scenario1 = scenarioRepo.save(Scenario("scenario1"))
+//        scenario1.rig = Rig("rig1", "desc1", null)
+//        scenario1.well = well1
+//        scenarioRepo.save(scenario1)
+//        println(scenario1.rig?.id)
+//        val desc1 = scenario1.rig?.description
+//        println(desc1)
+//    }
 
 //        public val GeneralLookupItemId.asScenarioAttributeValueId get() = ScenarioAttributeValueId(this.clientUid, this.id)
 //    fun doingStuffsWithGeneralLookup() {

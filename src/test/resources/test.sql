@@ -6,11 +6,11 @@ insert into rig(name, description) VALUES ('rig3', 'desc3')
 
 insert into well(name) VALUES('well1')
 
-insert into scenario(name, rigId, wellId) VALUES('scenario1', 1, 1)
-insert into scenario(name, rigId, wellId) VALUES('scenario2', 2, 1)
-insert into scenario(name, rigId, wellId) VALUES('scenario3', 3, 1)
+insert into scenario(name, well_id, rig_Id) VALUES('scenario1', 1, 1)
+insert into scenario(name, well_id, rig_Id) VALUES('scenario2', 1, 2)
+insert into scenario(name, well_id, rig_Id) VALUES('scenario3', 1, 3)
 
 insert into general_lookup_type(name) Values('scentype')
 insert into general_lookup_item(typeId, shortname) Values(1, 'item1')
 
-insert into scenario_attribute(scenarioId, lookupId) VALUES(1, 1)
+insert into scenario_attribute(scenario_Id, lookup_Id) VALUES(1, 1)

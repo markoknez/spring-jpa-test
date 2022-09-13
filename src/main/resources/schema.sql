@@ -16,10 +16,10 @@ create table if not exists scenario
 (
     id int primary key auto_increment,
     name varchar(255) not null,
-    wellId int not null,
-    rigId int not null,
-    foreign key (wellId) references well(id),
-    foreign key (rigId) references Rig(id)
+    well_Id int not null,
+    rig_Id int not null,
+    foreign key (well_id) references well(id),
+    foreign key (rig_id) references Rig(id)
 );
 
 create table if not exists general_lookup_type

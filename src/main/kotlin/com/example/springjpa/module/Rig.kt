@@ -11,12 +11,14 @@ import javax.persistence.*
 class Rig(
     var name: String,
     var description: String,
-    var buildDate: Date?
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Type(type = "com.example.springjpa.module.customtypes.ComplexIdSingleColumnType")
     var id: RigId? = null
+
+    @Column(name="build_date")
+    var buildDate: Date? = null
 }
 
 

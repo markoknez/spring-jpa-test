@@ -14,17 +14,17 @@ create table if not exists rig
     id   int primary key auto_increment,
     name varchar(255) not null,
     description varchar(255) default null,
-    buildDate dateTime default null
+    build_date dateTime default null
 );
 
 create table if not exists scenario
 (
     id int primary key auto_increment,
     name varchar(255) not null,
-    wellId int not null,
-    rigId int not null,
-    foreign key (wellId) references well(id),
-    foreign key (rigId) references Rig(id)
+    rig_Id int not null,
+    well_Id int not null,
+    foreign key (well_Id) references well(id),
+    foreign key (rig_Id) references Rig(id)
 );
 
 create table if not exists general_lookup_type
@@ -60,8 +60,8 @@ create table if not exists general_lookup_value
 
 create table if not exists scenario_attribute
 (
-    scenarioId int not null,
-    lookupId int not null,
-    foreign key (lookupId) references general_lookup_item(id),
-    foreign key (scenarioId) references scenario(id)
+    scenario_id int not null,
+    lookup_id int not null,
+    foreign key (lookup_id) references general_lookup_item(id),
+    foreign key (scenario_id) references scenario(id)
 );
