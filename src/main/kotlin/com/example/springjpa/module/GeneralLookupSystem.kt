@@ -13,19 +13,28 @@ class GeneralLookupType(var name: String) {
 }
 
 @Entity
-class GeneralLookupItem(var shortName: String) {
+class GeneralLookupItem(
+    @Column(name = "shortname")
+    var shortName: String
+) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Type(type = "com.example.springjpa.module.customtypes.ComplexIdSingleColumnType")
     var id: GeneralLookupItemId? = null
 
+
     @ManyToOne
-    var type: GeneralLookupType? = null
+    @JoinColumn(name = "typeid", nullable = false)
+    var typeId: GeneralLookupType? = null
 
 }
 
 @Entity
-class GeneralLookupLanguage(var name: String, var cultureCode: String, var isDefault: Boolean) {
+class GeneralLookupLanguage(
+    var name: String,
+    @Column(name = "culturecode") var cultureCode: String,
+    @Column(name = "isdefault") var isDefault: Boolean
+) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Type(type = "com.example.springjpa.module.customtypes.ComplexIdSingleColumnType")
@@ -38,15 +47,19 @@ class GeneralLookupLanguage(var name: String, var cultureCode: String, var isDef
 //Q: Since this dont have Id what should we do?
 @Entity
 @IdClass(GeneralLookupValueId::class)
-class GeneralLookupValue(@Id @Type(type = "com.example.springjpa.module.customtypes.ComplexIdSingleColumnType") var lookupId: GeneralLookupItemId, @Id @Type(type = "com.example.springjpa.module.customtypes.ComplexIdSingleColumnType") var langId: GeneralLookupLanguageId, var name: String)
+class GeneralLookupValue(@Id @Type(type = "com.example.springjpa.module.customtypes.ComplexIdSingleColumnType") @Column(name = "lookupid") var lookupId: GeneralLookupItemId,
+                         @Id @Type(type = "com.example.springjpa.module.customtypes.ComplexIdSingleColumnType") @Column(name = "langid") var langId: GeneralLookupLanguageId,
+                         var name: String)
 
 
 class GeneralLookupValueId() : Serializable {
     @Id
     @Type(type = "com.example.springjpa.module.customtypes.ComplexIdSingleColumnType")
+    @Column(name = "lookupid")
     var lookupId: GeneralLookupItemId? = null
 
     @Id
     @Type(type = "com.example.springjpa.module.customtypes.ComplexIdSingleColumnType")
+    @Column(name = "langid")
     var langId: GeneralLookupLanguageId? = null
 }

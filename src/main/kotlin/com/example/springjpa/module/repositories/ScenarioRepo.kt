@@ -12,3 +12,6 @@ interface ScenarioRepo : JpaRepository<Scenario, ScenarioId>{
     @Query("Select lookup_id from scenario_attribute where scenario_id = :scenarioId", nativeQuery = true)
     fun findAttributesForScenario(scenarioId: Int):Collection<Int>
 }
+
+//interface ScenarioRepo2 : JpaRepository<Scenario2, ScenarioId>{
+//}

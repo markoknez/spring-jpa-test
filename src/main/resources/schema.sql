@@ -65,6 +65,13 @@ create table if not exists comments
 (
     id int primary key auto_increment,
     comment varchar(255) not null,
-    scenarioId int not null,
-    foreign key (scenarioid) references scenario(id)
+    created Date DEFAULT now(),
+    scenario_Id int not null,
+    foreign key (scenario_id) references scenario(id)
+);
+
+create table if not exists scenario2
+(
+    id int primary key auto_increment,
+    name varchar(255) not null
 );

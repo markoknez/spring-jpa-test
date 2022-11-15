@@ -63,7 +63,7 @@ class Runner(
 //        println(desc1)
 //    }
 
-//        public val GeneralLookupItemId.asScenarioAttributeValueId get() = ScenarioAttributeValueId(this.clientUid, this.id)
+
 //    fun doingStuffsWithGeneralLookup() {
 //        val well1 = wellRepo.save(Well("well1"))
 //        val rig1 = rigRepo.save(Rig("rig1", "desc1", null))
